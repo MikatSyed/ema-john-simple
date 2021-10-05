@@ -8,6 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    console.log('userPhoto',loggedInUser.photo);
     return (
         <div className="header">
             <img src={Logo} alt="" />
@@ -30,7 +31,7 @@ const Header = () => {
         <span> 
         {
           loggedInUser.photo ? <span class="dropdown">
-  <img src={loggedInUser.photo} alt=""style={{ height: '30%',width: '50%',borderRadius: '50%'}}/>
+  <img src={loggedInUser.photo} alt="Not Available" style={{ height: '30%',width: '50%',borderRadius: '50%'}}/>
   <span class="dropdown-content">
   <Link to="#" className="bg-primary text-light">My Profile</Link>
   <Link to="#" onClick={()=>setLoggedInUser({})}>Sign Out</Link>
@@ -41,12 +42,7 @@ const Header = () => {
           <NavDropdown.Item  onClick={()=>setLoggedInUser({})}>SignOut</NavDropdown.Item>
         </NavDropdown>
         }
-        {/* {
-          loggedInUser.name && <NavDropdown title={loggedInUser.name} id="basic-nav-dropdown" >
-          <NavDropdown.Item  className="active">My Profile</NavDropdown.Item>
-          <NavDropdown.Item  onClick={()=>setLoggedInUser({})}>SignOut</NavDropdown.Item>
-        </NavDropdown>
-        } */}
+      
           
            </span>
          :
