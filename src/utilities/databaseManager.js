@@ -19,6 +19,7 @@ const getDataKey = () => {
 const getDatabaseCart = () => {
     const dataKey = getDataKey();
     const data = localStorage.getItem(dataKey) || "{}";
+    console.log("data",data);
     return JSON.parse(data);
 }
 

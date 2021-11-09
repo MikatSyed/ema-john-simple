@@ -2,22 +2,21 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import ReviewItem from '../ReviewItem/ReviewItem';
-import fakeData from './../../fakeData/index';
 import Cart from './../Cart/Cart';
-import Image from '../../images/giphy.gif'
 import { useHistory } from 'react-router';
 
 const Review = () => {
     const [cart, setCart] = useState([])
+    console.log("cart",cart);
     const [orderPlaced, setOrderPlaced] = useState(false);
     const history = useHistory();
-
+    document.title = "Ema John/Review"
     const handleProceedCheckOut = () => {
       history.push('./shipment')
     }
 
     const removeProduct = (productKey) => {
-        // console.log('remove done!',productKey);
+        console.log('remove done!',productKey);
         const newCart = cart.filter(pd => pd.key !== productKey);
         setCart(newCart);
         removeFromDatabaseCart(productKey);
@@ -29,18 +28,19 @@ const Review = () => {
         const productKeys = Object.keys(savedCart);
         // console.log(productKeys);
 
-        const cartProducts = productKeys.map(key => {
-            const product = fakeData.find(pd => pd.key === key);
-            product.quantity = savedCart[key];
-            return product;
+        fetch('http://localhost:6700/productsByKeys',{
+            method: 'POST',
+            headers: 
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productKeys)
         })
-        setCart(cartProducts);
+        .then(response => response.json())
+        .then(data => setCart(data))
     }, [])
 
-    let happyImage;
-    if(orderPlaced){
-       happyImage = <img src={Image} alt=""/>
-    }
+    
     return (
         <>
 
@@ -49,9 +49,7 @@ const Review = () => {
                     {
                         cart.map(pb => <ReviewItem product={pb} removeProduct={removeProduct} key={pb.key} />)
                     }
-                    { 
-                        happyImage
-                    }
+                   
                 </div>
 
                 <div className="cart-container">

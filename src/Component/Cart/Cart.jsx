@@ -4,12 +4,13 @@ import React from 'react';
 const Cart = (props) => {
     // console.log(props);
     const cart = props.cart;
-    // console.log(cart);
-    const total = cart.reduce((total, pd) => total + pd.price * pd.quantity || 1, 0)
-    // let totalAmount = 0;
+    // console.log('cart',cart);
+    const total = cart.reduce((total, pd) => total + pd.price * pd.quantity || 1
+    , 0)
+    // let total = 0;
     // for (let i = 0; i < cart.length; i++) {
     //     const element = cart[i];
-    //     totalAmount = totalAmount + element;   
+    //     total = total + element;   
     // }
     let shipping = 0;
     if (total > 35) {

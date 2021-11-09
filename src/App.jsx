@@ -32,9 +32,6 @@ function App() {
         <Route path="/review" component={Review} />
         <PrivateRoute path="/manage" component={Invertory} />
         <Route path="/product/:productKey" component={ProductDetails} />
-        {/* <PrivateRoute path="/shipment">
-          <Shipment />
-        </PrivateRoute> */}
         <PrivateRoute  path="/shipment"  component={Shipment}/>
         <Route path="/login" component={Login} />
         <Route  component={Error} />

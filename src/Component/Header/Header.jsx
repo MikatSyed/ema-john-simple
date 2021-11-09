@@ -33,7 +33,7 @@ const Header = () => {
           loggedInUser.photo ? <span class="dropdown">
   <img src={loggedInUser.photo} alt="Not Available" style={{ height: '30%',width: '50%',borderRadius: '50%'}}/>
   <span class="dropdown-content">
-  <Link to="#" className="bg-primary text-light">My Profile</Link>
+  <Link to="#" className="bg-primary text-light">{loggedInUser.name}</Link>
   <Link to="#" onClick={()=>setLoggedInUser({})}>Sign Out</Link>
 
   </span>
