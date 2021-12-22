@@ -13,6 +13,7 @@ import ProductDetails from './Component/ProductDetails/ProductDetails';
 import Shipment from './Component/Shipment/Shipment';
 import Login from './Component/Login/Login';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
+import ProcessPayment from './Component/Payment/ProcessPayment/ProcessPayment';
 
 
 export const UserContext = createContext();
@@ -21,13 +22,15 @@ function App() {
    console.log(loggedInUser);
    
   return (
+   
     <UserContext.Provider value={[loggedInUser,setLoggedInUser]}> 
      
   
      <Header />
       <Switch>
-
+   
         <Route exact path="/" component={Shop} />
+        <Route path="/process" component={ProcessPayment} />
         <Route path="/shop" component={Shop} />
         <Route path="/review" component={Review} />
         <PrivateRoute path="/manage" component={Invertory} />

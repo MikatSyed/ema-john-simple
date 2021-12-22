@@ -4,6 +4,7 @@ import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../uti
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from './../Cart/Cart';
 import { useHistory } from 'react-router';
+import Spinner from './../Spinner/Spinner';
 
 const Review = () => {
     const [cart, setCart] = useState([])
@@ -46,6 +47,7 @@ const Review = () => {
 
             <div className="shop-container">
                 <div className="product-container"> 
+                
                     {
                         cart.map(pb => <ReviewItem product={pb} removeProduct={removeProduct} key={pb.key} />)
                     }
@@ -54,7 +56,7 @@ const Review = () => {
 
                 <div className="cart-container">
                     <Cart cart={cart}>
-                        <button className="cart-button" onClick={handleProceedCheckOut}>Proceed Checkout</button>
+                        <button className="cart-button"  onClick={handleProceedCheckOut}>Proceed Checkout</button>
                     </Cart>
                 </div>
             </div>

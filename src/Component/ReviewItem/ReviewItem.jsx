@@ -10,20 +10,12 @@ const ReviewItem = (props) => {
             
             return bd === keys
         })
-        return 1;
+        console.log(newCart);
+        return savedCart[newCart]; 
         
     }
 
-    // productQuantity();
-    // const Fetch = (r) => {
-    //     const j = Object.keys(objs).find(o => {
-    //         console.log(r, o)
-    //         return o === r
-    //     })
-    //     return objs[j]
-    // };
-    
-    // console.log(Fetch("p2"))
+   
   
     const{name,key,price} = props.product;
 
@@ -38,7 +30,7 @@ const ReviewItem = (props) => {
     return (
         <div style={reviewItemStyle}>
             <h5 className="product-name">{name}</h5>
-            <p>Quantity: </p>
+            <p>Quantity:{productQuantity(key)} </p>
             <p>$ {price}</p>
             <button className="cart-button" onClick={() =>props.removeProduct(key)}>Remove</button>
         </div>

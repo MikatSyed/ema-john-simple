@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import firebaseConfig from './firebaseConfig'
 import firebase from 'firebase';
 import { UserContext } from '../../App';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import './Login.css'
 import Facebook from '../../images/Facebook-logo.png'
@@ -52,6 +52,7 @@ function Login() {
           email: email,
           photo: photoURL,
         }
+        setUserToken()
         setUser(signedInUser);
         setLoggedInUser(signedInUser);
         history.replace(from);
@@ -66,6 +67,15 @@ function Login() {
         const credential = error.credential;
 
       });
+  }
+
+  const setUserToken = () => {
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      sessionStorage.setItem('token',idToken);
+    }).catch(function(error) {
+      // Handle error
+    });
+  
   }
 
   const handleFacebookSignIn = () => {

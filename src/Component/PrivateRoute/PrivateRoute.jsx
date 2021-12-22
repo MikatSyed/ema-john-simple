@@ -9,7 +9,7 @@ function PrivateRoute({ component: Component, ...rest }) {
       <Route
         {...rest}
         render={props =>
-          loggedInUser.name ? (
+          (loggedInUser.email || sessionStorage.getItem('token')) ? (
             <Component {...props} />
           ) : (
             <Redirect

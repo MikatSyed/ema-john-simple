@@ -5,19 +5,22 @@ import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css';
 import { Link } from 'react-router-dom';
+import Spinner from './../Spinner/Spinner';
 
 const Shop = () => {
 
     const [products, setProducts] = useState([])
+    console.log(products);
     const [cart, setCart] = useState([])
+    const[search, setSearch] = useState('')
     document.title = "Ema John/Shop"
      
 
    useEffect(() => {
-    fetch('http://localhost:6700/products')
+    fetch('http://localhost:6700/products?search='+search)
     .then(res => res.json())
     .then(data => setProducts(data))
-   },[])
+   },[search])
 
 
 
@@ -58,12 +61,20 @@ const Shop = () => {
         addToDatabaseCart(product.key, count)
     }
 
+    const handleSearch = event =>{
+        setSearch(event.target.value);
+    }
+
+
     return (
+        <>
+        
         <div className="shop-container">
             <div className="product-container">
-
+            <input type="text" onBlur={handleSearch} placeholder="search product"/>
+            { products.length === 0 && <Spinner/>}
                 {
-                    products.map(pb => <Product handleAddProduct={handleAddProduct} product={pb} key={pb.key} showAddToCart={true} />)
+                    products.map((pb,index) => <Product handleAddProduct={handleAddProduct} product={pb} key={index} showAddToCart={true} />)
                 }
 
             </div>
@@ -77,6 +88,7 @@ const Shop = () => {
                 
             </div>
         </div>
+        </>
     );
 };
 
